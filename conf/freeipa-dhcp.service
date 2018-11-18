@@ -1,0 +1,13 @@
+[Unit]
+Description=FreeIPA DHCP Connector
+Requires=dnsmasq.service
+Documentation=https://github.com/lu1as/freeipa-dhcp
+After=network.target
+
+[Service]
+EnvironmentFile=-/etc/default/freeipa-dhcp
+Type=simple
+ExecStart=/usr/bin/freeipa-dhcp
+
+[Install]
+WantedBy=multi-user.target

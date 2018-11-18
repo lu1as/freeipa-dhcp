@@ -1,0 +1,16 @@
+# Configuration for freeipa dhcp connector
+
+DEBUG="false"
+UPDATEINTERVAL="1m"
+
+## FreeIPA
+IPASERVER="https://master.ipa.example.de"
+IPAUSER="admin"
+IPAPASSWORD="secret"
+IPAINSECURE="false"
+
+## DHCP
+DHCPSERVER="dnsmasq"
+DHCPZONE="example.de"
+DHCPTTL="infinite"
+DHCPHOSTSFILE="/etc/freeipa.hostsfile"
