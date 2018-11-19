@@ -30,7 +30,7 @@ func NewDHCPConnector(ipa *freeipa.FreeIPAClient, updateInterval time.Duration) 
 	}
 }
 
-func (c *DHCPConnector) Start(server string, zone string, filePath string, ttl string) {
+func (c *DHCPConnector) Start(server string, zone string, filePath string) {
 	switch server {
 	case "dnsmasq":
 		c.connector = &dnsmasq.DNSmasqConnector{}
@@ -52,7 +52,7 @@ func (c *DHCPConnector) Start(server string, zone string, filePath string, ttl s
 
 	log.Infof("Checking every %s for new hosts", c.update)
 	for {
-		hosts, err := c.generate(zone, ttl)
+		hosts, err := c.generate(zone)
 		if err != nil {
 			log.Fatal(err.Error())
 		}
@@ -71,7 +71,7 @@ func (c *DHCPConnector) Start(server string, zone string, filePath string, ttl s
 	}
 }
 
-func (c *DHCPConnector) generate(zone string, ttl string) (map[string]*dhcp.DHCPHostEntry, error) {
+func (c *DHCPConnector) generate(zone string) (map[string]*dhcp.DHCPHostEntry, error) {
 	allHosts, err := c.ipa.GetHosts()
 	if err != nil {
 		return nil, err
@@ -106,10 +106,9 @@ func (c *DHCPConnector) generate(zone string, ttl string) (map[string]*dhcp.DHCP
 			Name: host[0],
 			IP:   dns.ARecord[0],
 			MAC:  i.MAC[0],
-			TTL:  ttl,
 		}
 
-		log.Debugf("Add host: name: %s, ip: %s, mac: %s, ttl: %s", host[0], dns.ARecord[0], i.MAC[0], ttl)
+		log.Debugf("Add host: name: %s, ip: %s, mac: %s", host[0], dns.ARecord[0], i.MAC[0])
 		hosts[he.Name] = he
 	}
 

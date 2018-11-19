@@ -13,14 +13,12 @@ type DHCPHostEntry struct {
 	MAC  string
 	Name string
 	IP   string
-	TTL  string
 }
 
 func (e *DHCPHostEntry) Equals(o *DHCPHostEntry) bool {
 	if e.Name == o.Name &&
 		e.IP == o.IP &&
-		e.MAC == o.MAC &&
-		e.TTL == o.TTL {
+		e.MAC == o.MAC {
 		return true
 	}
 	return false

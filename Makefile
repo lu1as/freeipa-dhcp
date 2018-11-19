@@ -21,3 +21,6 @@ deb: $(BIN)-linux
 	/build/$(PROJECT)/build/$(BIN)=/usr/bin/ \
 	/build/$(PROJECT)/conf/$(BIN)=/etc/default/ \
 	/build/$(PROJECT)/conf/$(BIN).service=/lib/systemd/system/
+
+clean:
+	rm build/*

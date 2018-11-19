@@ -12,5 +12,4 @@ IPAINSECURE="false"
 ## DHCP
 DHCPSERVER="dnsmasq"
 DHCPZONE="example.de"
-DHCPTTL="infinite"
 DHCPHOSTSFILE="/etc/freeipa.hostsfile"

@@ -20,5 +20,5 @@ func (c *DNSmasqConnector) Reload(p *os.Process) error {
 }
 
 func (c *DNSmasqConnector) Format(e *dhcp.DHCPHostEntry) string {
-	return fmt.Sprintf("%s,%s,%s,%s\n", e.MAC, e.Name, e.IP, e.TTL)
+	return fmt.Sprintf("%s,%s,%s,infinite\n", e.MAC, e.Name, e.IP)
 }

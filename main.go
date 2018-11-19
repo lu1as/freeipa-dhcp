@@ -18,13 +18,12 @@ var (
 	ipaInsecure   bool
 	dhcpZone      string
 	dhcpServer    string
-	dhcpTTL       string
 	dhcpHostsFile string
 )
 
 func init() {
 	flag.BoolVar(&debug, "debug", false, "set log level to debug")
-	flag.DurationVar(&update, "updateInterval", time.Minute, "update interval")
+	flag.DurationVar(&update, "updateInterval", time.Minute, "update interval for new hosts")
 
 	// freeipa config
 	flag.StringVar(&ipaServer, "ipaServer", "https://master.ipa.example.de", "freeipa server address")
@@ -33,10 +32,9 @@ func init() {
 	flag.BoolVar(&ipaInsecure, "ipaInsecure", false, "allow invalid ssl certificate")
 
 	// dhcp config
-	flag.StringVar(&dhcpServer, "dhcpServer", "dnsmasq", "dhcp server name")
+	flag.StringVar(&dhcpServer, "dhcpServer", "dnsmasq", "dhcp server (options: dnsmasq, dhcpd)")
 	flag.StringVar(&dhcpZone, "dhcpZone", "example.de", "dns zone")
-	flag.StringVar(&dhcpTTL, "dhcpTTL", "infinite", "dhcp lease time to live")
-	flag.StringVar(&dhcpHostsFile, "dhcpHostsFile", "zone.hosts", "hosts output file path")
+	flag.StringVar(&dhcpHostsFile, "dhcpHostsFile", "freeipa-dhcp.hosts", "dhcp hostsfile path")
 }
 
 func main() {
@@ -55,5 +53,5 @@ func main() {
 	}
 
 	d := connector.NewDHCPConnector(ipa, update)
-	d.Start(dhcpServer, dhcpZone, dhcpHostsFile, dhcpTTL)
+	d.Start(dhcpServer, dhcpZone, dhcpHostsFile)
 }
