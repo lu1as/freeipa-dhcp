@@ -3,7 +3,7 @@ package main
 import (
 	"time"
 
-	"github.com/lu1as/freeipa-dhcp/dhcp"
+	"github.com/lu1as/freeipa-dhcp/dhcp/connector"
 	"github.com/lu1as/freeipa-dhcp/freeipa"
 	"github.com/namsral/flag"
 	log "github.com/sirupsen/logrus"
@@ -54,6 +54,6 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
-	d := dhcp.NewDHCPConnector(ipa, update)
+	d := connector.NewDHCPConnector(ipa, update)
 	d.Start(dhcpServer, dhcpZone, dhcpHostsFile, dhcpTTL)
 }
