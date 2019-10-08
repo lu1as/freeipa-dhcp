@@ -7,8 +7,7 @@ PKG_VERSION=0.1.0
 build: $(BIN)
 
 $(BIN):
-	mkdir -p build
-	go build -o $(OUTPUT_DIR)/$(BIN)
+	go build -o ${GOPATH}/bin/$(BIN)
 
 $(BIN)-linux:
 	mkdir -p build
@@ -21,6 +20,3 @@ deb: $(BIN)-linux
 	/build/$(PROJECT)/build/$(BIN)=/usr/bin/ \
 	/build/$(PROJECT)/conf/$(BIN)=/etc/default/ \
 	/build/$(PROJECT)/conf/$(BIN).service=/lib/systemd/system/
-
-clean:
-	rm build/*

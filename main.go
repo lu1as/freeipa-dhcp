@@ -26,7 +26,7 @@ func init() {
 	flag.DurationVar(&update, "updateInterval", time.Minute, "update interval for new hosts")
 
 	// freeipa config
-	flag.StringVar(&ipaServer, "ipaServer", "https://master.ipa.example.de", "freeipa server address")
+	flag.StringVar(&ipaServer, "ipaServer", "https://ipa.example.com", "freeipa server address")
 	flag.StringVar(&ipaUser, "ipaUser", "admin", "freeipa user name")
 	flag.StringVar(&ipaPassword, "ipaPassword", "secret", "freeipa user password")
 	flag.BoolVar(&ipaInsecure, "ipaInsecure", false, "allow invalid ssl certificate")
